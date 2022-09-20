@@ -30,6 +30,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LemonButtonAndImage(modifier: Modifier = Modifier) {
 
+    var squeezes by remember { mutableStateOf(4) }
     var currentStep by remember { mutableStateOf(1) }
     val imageResource = when(currentStep) {
         1 -> R.drawable.lemon_tree
@@ -55,15 +56,12 @@ fun LemonButtonAndImage(modifier: Modifier = Modifier) {
         )
         Button(onClick = {
             if(currentStep == 2){
-                var squeezes = 3
-                while(squeezes != 0){
-                    squeezes--
-                    if(squeezes == 0){
-                        currentStep++
-                    }
+                squeezes--
+                if(squeezes == 0){
+                    currentStep++
+                    squeezes = 4
+
                 }
-
-
 
             }
             else if(currentStep == 4){
