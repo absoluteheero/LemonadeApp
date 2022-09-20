@@ -40,7 +40,7 @@ fun LemonButtonAndImage(modifier: Modifier = Modifier) {
 
     val textString = when(currentStep) {
         1 -> R.string.lemon_tree
-        2 -> R.string.lemon
+        2 -> R.string.lemon_tap
         3 -> R.string.lemon_drink
         else -> R.string.lemon_restart
     }
@@ -54,7 +54,19 @@ fun LemonButtonAndImage(modifier: Modifier = Modifier) {
             fontSize = 18.sp
         )
         Button(onClick = {
-            if(currentStep == 4){
+            if(currentStep == 2){
+                var squeezes = 3
+                while(squeezes != 0){
+                    squeezes--
+                    if(squeezes == 0){
+                        currentStep++
+                    }
+                }
+
+
+
+            }
+            else if(currentStep == 4){
                 currentStep = 1
 
             }else{
