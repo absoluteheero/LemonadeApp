@@ -86,3 +86,7 @@ fun LemonApp() {
             .fillMaxSize()
             .wrapContentSize(Alignment.Center))
 }
+
+fun playSound(step: Int){
+
+}
