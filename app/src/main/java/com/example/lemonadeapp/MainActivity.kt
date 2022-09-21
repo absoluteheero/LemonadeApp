@@ -1,5 +1,7 @@
 package com.example.lemonadeapp
 
+import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,6 +33,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LemonButtonAndImage(modifier: Modifier = Modifier) {
 
+    val context = LocalContext.current
     var squeezes by remember { mutableStateOf(4) }
     var currentStep by remember { mutableStateOf(1) }
     val imageResource = when(currentStep) {
@@ -55,6 +59,7 @@ fun LemonButtonAndImage(modifier: Modifier = Modifier) {
             fontSize = 18.sp
         )
         Button(onClick = {
+            playSound(currentStep, context)
             if(currentStep == 2){
                 squeezes--
                 if(squeezes == 0){
@@ -87,6 +92,14 @@ fun LemonApp() {
             .wrapContentSize(Alignment.Center))
 }
 
-fun playSound(step: Int){
+fun playSound(step: Int, context: Context){
 
+    val sound = when(step) {
+        1 -> MediaPlayer.create(context, R.raw.whoosh);
+        2 -> MediaPlayer.create(context, R.raw.squeeze);
+        3 -> MediaPlayer.create(context, R.raw.drinking);
+        else -> MediaPlayer.create(context, R.raw.empty);
+    }
+
+    sound.start()
 }
